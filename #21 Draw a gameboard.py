@@ -12,15 +12,28 @@
 
 #Ask the user what size  game board they want to draw, and draw it for them to the screen using Python’s print statement.
 
-oneboard=("--- \n"
-         "|   ")
+oneboard=(" ---")
+oneboard_down=("   |")
 
 print(oneboard)
 
 dlugosc=int(input("Podaj dlugość: "))
 szerokosc=int(input("Podaj szerokosc: "))
 
-
+board=""
+board_low="|"
+board_martix=""
+b_m_low=""
+enter="\n"
 
 for x in range(szerokosc):
-    print(oneboard)
+    board+=oneboard
+    board_low+=oneboard_down
+
+board_martix=board+enter+board_low
+
+for y in range(dlugosc):
+    b_m_low+= enter+ board_martix
+
+
+print(b_m_low+enter+board)
