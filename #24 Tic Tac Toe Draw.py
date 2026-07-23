@@ -56,85 +56,100 @@ def podaj_polozenie(x):
 
 #Gra:
 
-czy_gramy=True
 
+def gra():
 
+	while True:
 
-while czy_gramy==True:
+		for player in range(1,3):
+			podaj_polozenie(player)
+			#for row in board:
+			#	print(row)
+			draw_a_gameboard(board)
 
-	for player in range(1,3):
-		podaj_polozenie(player)
-		#for row in board:
-		#	print(row)
-		print(draw_a_gameboard(board))
-
-# Sprawdzanie czy w poziomie są takie same
-		for row in board:
-			if len(set(row)) <= 1:
-				if row[1] == 1:
-					print("Wygrał gracz 1")
-					czy_gramy = False
-					break
-				if row[1] == 2:
-					print("Wygrał gracz 2")
-					czy_gramy = False
-					break
-
-# Sprawdzenie, czy w pionie są takie same
-		for i in range(3):
-			pion=[]
+	# Sprawdzanie czy w poziomie są takie same
 			for row in board:
-				x=row[i]
-				pion.append(x)
-			if len(set(pion)) <= 1:
-				if pion[1] == 1:
+				if len(set(row)) <= 1:
+					if row[1] == 1:
+						print("Wygrał gracz 1")
+						#czy_gramy = False
+						return
+					if row[1] == 2:
+						print("Wygrał gracz 2")
+						# czy_gramy = False
+						return
+
+	# Sprawdzenie, czy w pionie są takie same
+			for i in range(3):
+				pion=[]
+				for row in board:
+					x=row[i]
+					pion.append(x)
+				if len(set(pion)) <= 1:
+					if pion[1] == 1:
+						print("Wygrał gracz 1")
+						# czy_gramy = False
+						return
+					if pion[1] == 2:
+						print("Wygrał gracz 2")
+						# czy_gramy = False
+						return
+
+	# Sprawdzenie, czy po przekątnej są takie same:
+			przekatna = []
+			for i in range(3):
+				x=board[i][i]
+				przekatna.append(x)
+			if len(set(przekatna)) <= 1:
+				if przekatna[1] == 1:
 					print("Wygrał gracz 1")
-					czy_gramy = False
-					break
-				if pion[1] == 2:
+					# czy_gramy = False
+					return
+				if przekatna[1] == 2:
 					print("Wygrał gracz 2")
-					czy_gramy = False
-					break
+					# czy_gramy = False
+					return
 
-# Sprawdzenie, czy po przekątnej są takie same:
-		przekatna = []
-		for i in range(3):
-			x=board[i][i]
-			przekatna.append(x)
-		if len(set(przekatna)) <= 1:
-			if przekatna[1] == 1:
-				print("Wygrał gracz 1")
-				czy_gramy = False
-				break
-			if przekatna[1] == 2:
-				print("Wygrał gracz 2")
-				czy_gramy = False
-				break
-
-		przekatna_2 = []
-		for j in range(3):
-			i=0
-			if j==0:
-				i=2
-			elif j==1:
-				i=1
-			elif j==2:
+			przekatna_2 = []
+			for j in range(3):
 				i=0
-			x=board[j][i]
-			przekatna_2.append(x)
-		if len(set(przekatna_2)) <= 1:
-			if przekatna_2[0] == 1:
-				print("Wygrał gracz 1")
-				czy_gramy = False
-				break
-			if przekatna_2[0] == 2:
-				print("Wygrał gracz 2")
-				czy_gramy = False
-				break
+				if j==0:
+					i=2
+				elif j==1:
+					i=1
+				elif j==2:
+					i=0
+				x=board[j][i]
+				przekatna_2.append(x)
+			if len(set(przekatna_2)) <= 1:
+				if przekatna_2[0] == 1:
+					print("Wygrał gracz 1")
+					# czy_gramy = False
+					return
+				if przekatna_2[0] == 2:
+					print("Wygrał gracz 2")
+					# czy_gramy = False
+					return
 
-		elif not any(0 in row for row in board):
-			print("Remis")
-			czy_gramy=False
+			elif not any(0 in row for row in board):
+				print("Remis")
+				# czy_gramy = False
+				return
+
+
+
+
+
+while True:
+		board = [[0, 0, 0],
+				 [0, 0, 0],
+				 [0, 0, 0]]
+
+		gra()
+
+		gramy=input("Czy chcesz grać dalej? T/N:")
+
+		if gramy!="T":
 			break
 
 
